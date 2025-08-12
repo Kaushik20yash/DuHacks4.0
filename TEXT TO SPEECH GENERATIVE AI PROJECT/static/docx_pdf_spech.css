@@ -1,0 +1,151 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Default dark mode styles */
+body.dark {
+    background-color: black;
+    color: white;
+}
+
+/* Light mode styles */
+body.light {
+    background-color: white;
+    color: black;
+}
+
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: inherit; /* inherit from body */
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-weight: bold;
+    margin: 10px;
+}
+
+textarea, select, input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 10px;
+    border-radius: 6px;
+    font-size: 1em;
+    background-color: inherit;  /* match body background */
+    color: inherit;             /* match text color */
+}
+
+textarea {
+    resize: vertical;
+}
+
+button {
+    background-color: #ff0066;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 1.1em;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 10px;
+}
+
+button:hover {
+    background-color: #2f2188;
+}
+
+.audio-section {
+    margin-top: 30px;
+    text-align: center;
+}
+
+audio {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Make sure labels and text adapt color for modes */
+body.light label,
+body.light h1, 
+body.light h2 {
+    color: black;
+}
+
+body.dark label,
+body.dark h1,
+body.dark h2 {
+    color: white;
+}
+
+/* Light mode (default) */
+body.light select {
+  background-color: white;
+  color: black;
+}
+
+/* Dark mode */
+body.dark select {
+  background-color: #222;  /* dark background */
+  color: white;            /* white text */
+  border: 1px solid #555;
+}
+
+/* Optional: style options inside select (limited support) */
+body.dark select option {
+  background-color: #222;
+  color: white;
+}
+.toggle-container {
+  display: flex;
+  justify-content: flex-end; /* pushes content to right */
+  padding: 10px 20px; /* optional spacing */
+  background-color: transparent; /* or your choice */
+}
+#toggleBtn {
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  background-color: #ff0066;
+  color: white;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+#toggleBtn:hover {
+  background-color: #d00056;
+}
+.toggle-container {
+  display: flex;
+  justify-content: flex-end; /* pushes content to right */
+  padding: 10px 20px; /* optional spacing */
+  background-color: transparent; /* or your choice */
+}
+#toggleBtn {
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  background-color: #ff0066;
+  color: white;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+#toggleBtn:hover {
+  background-color: #d00056;
+}

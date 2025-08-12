@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Text-to-Speech Translator</title>
+  <link rel="stylesheet" href="/static/text_to_speech.css">
+  
+</head>
+<body>
+
+  <div class="home">
+      <a href="main.html" style="text-decoration:none; font-weight:bold; font-size:18px; color:#333; padding:6px 12px; border:1px solid #ccc; border-radius:4px; background:#fff; transition: background-color 0.3s;">
+        🏠 Home
+      </a>
+    </div>
+
+  <div class="toggle-container">
+    <label for="modeToggle">Day / Night</label>
+    <label class="switch">
+      <input type="checkbox" id="modeToggle" />
+      <span class="slider"></span>
+    </label>
+  </div>
+ 
+
+
+  <h1>🌍 Text-to-Speech Translator</h1>
+
+  <form id="ttsForm" method="POST" action="/process-tts">
+    <label for="text">Enter Text:</label>
+    <textarea name="text" id="text" rows="5" placeholder="Type your text here..."></textarea>
+
+    <!--
+    <label for="file">Or Upload PDF/DOCX:</label>
+    <input type="file" name="file" id="file" accept=".pdf,.docx" />
+    -->
+
+    <label for="target_language">Select Target Language:</label>
+    <select name="target_language" id="target_language" required>
+      <option value="">-- Select Language --</option>
+      <option>English</option>
+      <option>French</option>
+      <option>Hindi</option>
+      <option>Spanish</option>
+      <option>German</option>
+      <option>Italian</option>
+      <option>Chinese</option>
+      <option>Japanese</option>
+      <option>Arabic</option>
+      <option>Russian</option>
+      <option>Bengali</option>
+      <option>Thai</option>
+      <option>Afrikaans</option>
+      <option>Catalan</option>
+      <option>Danish</option>
+      <option>Dutch</option>
+      <option>Esperanto</option>
+      <option>Estonian</option>
+      <option>Greek</option>
+      <option>Gujarati</option>
+      <option>Hungarian</option>
+      <option>Icelandic</option>
+      <option>Indonesian</option>
+      <option>Javanese</option>
+      <option>Kannada</option>
+      <option>Khmer</option>
+      <option>Korean</option>
+      <option>Latin</option>
+      <option>Latvian</option>
+      <option>Malayalam</option>
+      <option>Malay</option>
+      <option>Marathi</option>
+      <option>Myanmar</option>
+      <option>Romanian</option>
+      <option>Turkish</option>
+      <option>Urdu</option>
+      <option>Ukrainian</option>
+    </select>
+
+    <label for="accent">Select Accent:</label>
+    <select name="accent" id="accent">
+      <option value="">-- Select Accent --</option>
+      <option>US</option>
+      <option>UK</option>
+      <option>India</option>
+      <option>Canada</option>
+      <option>Australia</option>
+    </select>
+
+    <button type="submit">🔊 Translate & Speak</button>
+  </form>
+
+  <div class="audio-section">
+  <div id="processingMessage" class="message" style="text-align:center; display:none; font-weight:bold;">⏳ Processing, please wait...</div>
+  <div id="message" class="message"></div>
+  <div id="translatedText" class="message"></div>
+
+  <h2>🔈 Output Audio:</h2>
+  <audio id="audioPlayer" controls style="display: none;"></audio>
+</div>
+
+<script>
+  document.getElementById('ttsForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    const processingMessage = document.getElementById('processingMessage');
+    const translatedText = document.getElementById('translatedText');
+    const audioPlayer = document.getElementById('audioPlayer');
+
+    // Show processing message
+    processingMessage.style.display = 'block';
+    translatedText.textContent = '';
+    audioPlayer.style.display = 'none';
+
+    try {
+      const response = await fetch('/process-tts', {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await response.json();
+
+      // Hide processing
+      processingMessage.style.display = 'none';
+
+      if (data.error) {
+        alert(data.error);
+        return;
+      }
+
+      // Show translated text
+      translatedText.textContent = data.translated_text;
+
+      // Play audio
+      audioPlayer.src = data.audio_url;
+      audioPlayer.style.display = 'block';
+      audioPlayer.play();
+
+    } catch (err) {
+      processingMessage.style.display = 'none';
+      alert("An unexpected error occurred");
+      console.error("Error:", err);
+    }
+  });
+
+  // Dark/light mode toggle (unchanged)
+  const toggle = document.getElementById('modeToggle');
+  const body = document.body;
+
+  if(localStorage.getItem('mode') === 'light') {
+    body.classList.add('light-mode');
+    toggle.checked = true;
+  }
+
+  toggle.addEventListener('change', () => {
+    if(toggle.checked) {
+      body.classList.add('light-mode');
+      body.classList.remove('dark-mode');
+      localStorage.setItem('mode', 'light');
+    } else {
+      body.classList.remove('light-mode');
+      body.classList.add('dark-mode');
+      localStorage.setItem('mode', 'dark');
+    }
+  });
+</script>
+</body>
+</html>

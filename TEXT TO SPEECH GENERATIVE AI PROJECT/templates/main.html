@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+    :root {
+            --bg-color: #000000;
+            --sidebar-bg: #141414;
+            --text-color: white;
+            --link-hover-bg: #ff0066;
+            --link-hover-color: #fff;
+            --btn-bg: #ff0066;
+            --btn-bg-hover: #f33883;
+            --toggle-border: #f2f2f2;
+        }
+        body.light {
+            --bg-color: #f9f9f9;
+            --sidebar-bg: #e0e0e0;
+            --text-color: #222222;
+            --link-hover-bg: #ff6699;
+            --link-hover-color: #222;
+            --btn-bg: #ff6699;
+            --btn-bg-hover: #ff85b3;
+            --toggle-border: #555555;
+        }
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        background-color: black;
+        transition: background 0.4s ease, color 0.4s ease;
+
+    }
+
+    .main{
+        background-color: black;
+        display: flex;
+        /* justify-content: center; */
+        /* align-items: center; */
+        flex-direction: row;
+        height: 735px;
+        width: 100vw;
+        gap: 2rem;
+    }
+    #heading{
+        height: 200px;
+        width: 1100px;
+        background-color: #700831;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        font-size: x-large;
+        color: wheat;
+        margin: 40px;
+    }
+    
+    #btn{
+        height: 80px;
+        width: 500px;
+        background-color: #ff0066;
+        font-size: xx-large;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        border: 2px solid greenyellow;
+        /* font-weight: bold; */
+        border-radius: 10px;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        transition: background-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.2s ease,
+        color 0.3s ease;
+    }
+
+    #btn:hover{
+        background: linear-gradient(45deg, rgb(1, 42, 55), rgb(8, 1, 24));
+    box-shadow: 0 10px 25px rgba(53, 2, 2, 0.8);
+    color: #e0ffe0;
+    transform: scale(1.05);
+    }
+
+    .buttons{
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .left{
+        width: 250px;
+        /* background-color: ; */
+        /* border: 2px solid white; */
+    }
+
+    .right {
+    width: 75%;
+    padding: 20px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100%;
+            background-color: var(--sidebar-bg);
+            padding: 20px 10px;
+            box-sizing: border-box;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar h2 {
+            color: #00ff88;
+            margin-bottom: 20px;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .sidebar a {
+            font-size: 18px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            display: block;
+            padding: 12px 15px;
+            color: var(--text-color);
+            text-decoration: none;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            background-color: transparent;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--link-hover-bg);
+            color: var(--link-hover-color);
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        .sidebar a.big-bttn:hover {
+            background-color: var(--link-hover-bg);
+            color: var(--link-hover-color);
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+
+/* Toggle */
+/* Toggle Button */
+    .toggle-button {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 28px;
+      cursor: pointer;
+      background-color: var(--btn-bg);
+      color: white;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .toggle-button:hover {
+      background-color: var(--btn-bg-hover);
+      transform: scale(1.1);
+    }
+
+    .toggle-button .moon,
+    .toggle-button .sun {
+      display: none;
+    }
+
+    body:not(.light) .moon {
+      display: inline-block;
+    }
+
+    body.light .sun {
+      display: inline-block;
+    }
+
+        
+</style>
+<body>
+    <div class="main">
+    <div class="left">
+        <div class="sidebar">
+            <h2>UniAI Dashboard</h2>
+            <a href="#">🖼 Image to Text</a>
+            <a href="/text2img" class="big-bttn">🖋 Text to Image</a>
+            <a href="#">🎙 Voice to Text</a>
+            <a href="#">🗣 Text to Voice</a>
+            <a href="#">🖍 Image Captioning</a>
+            <a href="#">🌐 Translation</a>
+            <a href="#">🤖 Q&amp;A / Chatbot</a>
+            <a href="#">📝 Summarization</a>
+            <a href="#">📂 File Format Changer</a>
+            <a href="#" style="background-color:#222; color:white;">🎉 Fun Section</a>
+        </div>
+    </div>
+    <div class="right">
+        <div id="heading">
+                <h1>🌍 TEXT,DOC,PDF to Speech Converter</h1>
+        </div>
+        <div class="buttons">
+            <a href="/text_to_speech" id="btn">Text to speech</a>
+            <a href="/docx_pdf_speech" id="btn">PDF/Docx to speech</a>
+        </div>
+    </div>
+    </div>
+    <button class="toggle-button" onclick="toggleDarkMode()">
+        <span class="moon">🌙</span>
+        <span class="sun">🔆</span>
+    </button>
+<script>
+  // Load saved theme
+  if (localStorage.getItem('theme') === 'light') {
+    document.body.classList.add('light');
+  }
+
+  function toggleDarkMode() {
+    document.body.classList.toggle('light');
+    if (document.body.classList.contains('light')) {
+      localStorage.setItem('theme', 'light');
+    } else {
+      localStorage.removeItem('theme');
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Document-to-Speech Translator</title>
+  <link rel="stylesheet" href="/static/docx_pdf_spech.css" />
+</head>
+
+<div class="home">
+      <a href="main.html" style="text-decoration:none; font-weight:bold; font-size:18px; color:#333; padding:6px 12px; border:1px solid #ccc; border-radius:4px; background:#fff; transition: background-color 0.3s;">
+        🏠 Home
+      </a>
+    </div>
+<body id="body" class="dark">
+  <div class="toggle-container">
+    <button onclick="toggleMode()" id="toggleBtn">Toggle Day/Night</button>
+  </div>
+
+
+  <h1>🌍 Document-to-Speech Translator</h1>
+
+  <form id="translateForm" enctype="multipart/form-data">
+    <label for="file">Upload PDF/DOCX:</label>
+    <input type="file" name="file" id="file" accept=".pdf,.docx" />
+
+    <label for="target_language">Select Target Language:</label>
+    <select name="target_language" id="target_language" required>
+      <option value="">-- Select Language --</option>
+      <option>English</option>
+      <option>French</option>
+      <option>Hindi</option>
+      <option>Spanish</option>
+      <option>German</option>
+      <option>Italian</option>
+      <option>Chinese</option>
+      <option>Japanese</option>
+      <option>Arabic</option>
+      <option>Russian</option>
+      <option>Bengali</option>
+      <option>Thai</option>
+      <option>Afrikaans</option>
+      <option>Catalan</option>
+      <option>Danish</option>
+      <option>Dutch</option>
+      <option>Esperanto</option>
+      <option>Estonian</option>
+      <option>Greek</option>
+      <option>Gujarati</option>
+      <option>Hungarian</option>
+      <option>Icelandic</option>
+      <option>Indonesian</option>
+      <option>Javanese</option>
+      <option>Kannada</option>
+      <option>Khmer</option>
+      <option>Korean</option>
+      <option>Latin</option>
+      <option>Latvian</option>
+      <option>Malayalam</option>
+      <option>Malay</option>
+      <option>Marathi</option>
+      <option>Myanmar</option>
+      <option>Romanian</option>
+      <option>Turkish</option>
+      <option>Urdu</option>
+      <option>Ukrainian</option>
+    </select>
+
+    <label for="accent">Select Accent:</label>
+    <select name="accent" id="accent">
+      <option value="">-- Select Accent --</option>
+      <option>US</option>
+      <option>UK</option>
+      <option>India</option>
+      <option>Canada</option>
+      <option>Australia</option>
+    </select>
+
+    <button type="submit">🔊 Translate & Speak</button>
+  </form>
+
+  <div class="audio-section">
+    <div id="message" class="message"></div>
+
+    <h2>🔈 Output Audio:</h2>
+    <audio id="audioPlayer" controls style="display: none;"></audio>
+  </div>
+
+  <script>
+
+document.getElementById("translateForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    const message = document.getElementById("message");
+    const audio = document.getElementById("audioPlayer");
+
+    message.textContent = "⏳ Processing file...";
+    audio.style.display = "none";
+
+    try {
+        const res = await fetch("/process-doc", {
+            method: "POST",
+            body: formData,
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+            message.textContent = "Translation complete!";
+            audio.src = data.audio_url;
+            audio.style.display = "block";
+        } else {
+            message.textContent = "Error: " + data.error;
+        }
+    } catch (err) {
+        message.textContent = "Failed to upload: " + err.message;
+    }
+});
+
+    const body = document.body;
+    const toggleBtn = document.getElementById('toggleBtn');
+
+    toggleBtn.addEventListener('click', () => {
+      if (body.classList.contains('dark')) {
+        body.classList.remove('dark');
+        body.classList.add('light');
+        toggleBtn.textContent = 'Switch to Night Mode';
+      } else {
+        body.classList.remove('light');
+        body.classList.add('dark');
+        toggleBtn.textContent = 'Switch to Day Mode';
+      }
+    });
+  </script>
+</body>
+</html>

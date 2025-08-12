@@ -1,0 +1,16 @@
+# Flask
+# scikit-learn
+# pandas
+# numpy
+# difflib
+# requests
+# gunicorn
+
+# pip install -r requirements.txt
+
+Flask 
+gtts 
+googletrans==4.0.0-rc1 
+langdetect 
+python-docx 
+pymupdf

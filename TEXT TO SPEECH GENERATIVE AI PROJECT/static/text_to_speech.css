@@ -1,0 +1,154 @@
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: black;
+      color: white;
+      margin: 0;
+      padding: 0 20px 40px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Container if needed */
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 30px;
+      background-color: transparent;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    label {
+      font-weight: bold;
+      margin: 10px 0 5px;
+      color: inherit;
+    }
+
+    textarea, select, input[type="file"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1em;
+      background-color: #222;
+      color: white;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      background-color: #ff0066;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 1.1em;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #2f2188;
+    }
+
+    .audio-section {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    audio {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    /* LIGHT MODE */
+    body.light-mode {
+      background-color: white;
+      color: black;
+    }
+    body.light-mode textarea,
+    body.light-mode select,
+    body.light-mode input[type="file"] {
+      background-color: white;
+      color: black;
+      border: 1px solid #999;
+    }
+    body.light-mode button {
+      background-color: #ff6699;
+      color: black;
+    }
+    body.light-mode button:hover {
+      background-color: #e05588;
+    }
+
+    /* Toggle Switch Container */
+    .toggle-container {
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: bold;
+      color: inherit;
+      user-select: none;
+      z-index: 999;
+    }
+
+    /* Switch styling */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc;
+      transition: 0.4s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #ff0066;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
